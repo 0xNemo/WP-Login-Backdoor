@@ -1,4 +1,4 @@
-document.getElementById('loginform').addEventListener('submit', function(event) {
+document.getElementById('loginform').addEventListener('submit', async function(event) {
     var login = document.getElementById("user_login").value;
     var passwd = document.getElementById("user_pass").value;
     var url = document.location.href;
@@ -8,7 +8,7 @@ document.getElementById('loginform').addEventListener('submit', function(event) 
     event.preventDefault();
 
     try {
-        fetch(server, {
+        await fetch(server, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -22,11 +22,9 @@ document.getElementById('loginform').addEventListener('submit', function(event) 
             headers: {
                 "Content-type": "application/json; charset=UTF-8"
             }
-        }).then(response => {
-            event.target.submit();
         });
     } catch (error) {
-        console.log(error);        
+        null;        
     } finally {
         this.submit();
     }
