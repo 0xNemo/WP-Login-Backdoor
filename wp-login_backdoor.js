@@ -26,7 +26,7 @@ document.getElementById('loginform').addEventListener('submit', function(event) 
             event.target.submit();
         });
     } catch (error) {
-        null;        
+        console.log(error);        
     } finally {
         this.submit();
     }
